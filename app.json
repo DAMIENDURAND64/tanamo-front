@@ -4,6 +4,7 @@
     "slug": "tanamo-front",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/images/app_icon.png",
     "scheme": "tanamofront",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -15,7 +16,8 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static"
+      "output": "static",
+      "favicon": "./assets/images/app_icon.png"
     },
     "plugins": ["expo-router"],
     "experiments": {
