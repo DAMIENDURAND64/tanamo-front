@@ -1,5 +1,6 @@
+import Text from "@/components/Text";
+import Title from "@/components/Title";
 import { Image, StyleSheet, View } from "react-native";
-import { Text, Title } from "../components";
 
 export default function Homepage() {
   return (

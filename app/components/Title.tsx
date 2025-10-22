@@ -2,7 +2,7 @@ import React from "react";
 import { Text as RNText, TextStyle } from "react-native";
 
 // Tailles prédéfinies pour les titres
-type TitleSize =
+export type TitleSize =
   | "h1" // 32px - Titre principal
   | "h2" // 28px - Sous-titre principal
   | "h3" // 24px - Titre de section
@@ -12,13 +12,13 @@ type TitleSize =
   | number; // Taille personnalisée
 
 // Weights disponibles (600-700)
-type TitleWeight =
+export type TitleWeight =
   | "semibold" // 600
   | "bold" // 700 (maximum)
   | number; // Weight personnalisé (600-700)
 
 // Couleurs (on réutilise les mêmes que Text)
-type TitleColor =
+export type TitleColor =
   | "primary" // Orange principal
   | "secondary" // Gris foncé
   | "muted" // Gris clair
@@ -124,6 +124,3 @@ export default function Title({
     </RNText>
   );
 }
-
-// Export des types
-export type { TitleColor, TitleProps, TitleSize, TitleWeight };

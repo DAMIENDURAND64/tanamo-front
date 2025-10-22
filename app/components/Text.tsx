@@ -2,10 +2,10 @@ import React from "react";
 import { Text as RNText, TextStyle } from "react-native";
 
 // 3 variants simples
-type TextVariant = "caption" | "normal" | "bold";
+export type TextVariant = "caption" | "normal" | "bold";
 
 // Couleurs disponibles
-type TextColor =
+export type TextColor =
   | "primary" // Orange principal
   | "secondary" // Gris foncé
   | "muted" // Gris clair
@@ -106,6 +106,3 @@ export default function Text({
     </RNText>
   );
 }
-
-// Export des types pour pouvoir les utiliser ailleurs
-export type { TextColor, TextProps, TextVariant };
