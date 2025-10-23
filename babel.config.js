@@ -3,13 +3,10 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      require.resolve('expo-router/babel'),
       [
-        'module-resolver',
+        require.resolve('babel-plugin-module-resolver'),
         {
-          alias: {
-            '@': './app',
-          },
+          alias: { '@': './app' },
           extensions: [
             '.ios.ts',
             '.android.ts',
