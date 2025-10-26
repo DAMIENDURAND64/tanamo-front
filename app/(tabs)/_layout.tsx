@@ -1,14 +1,20 @@
+import { useAuth } from "@/providers/AuthProvider";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
-import { useAuth } from "@/providers/AuthProvider";
 import { Redirect, Tabs } from "expo-router";
 
 export default function TabLayout() {
   const { session, loading } = useAuth();
+
+  if (loading) {
+    return null;
+  }
+
   if (!loading && !session) {
     return <Redirect href="/(auth)/login" />;
   }
+
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "orange" }}>
       <Tabs.Screen

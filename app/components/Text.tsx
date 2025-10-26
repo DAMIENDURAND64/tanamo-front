@@ -44,21 +44,21 @@ export default function Text({
           fontSize: 12,
           fontWeight: "400",
           color: "#718096",
-          fontFamily: "Inter",
+          // fontFamily: "Inter",
         };
       case "bold":
         return {
           fontSize: 18,
           fontWeight: "700",
           color: "#000000",
-          fontFamily: "Inter",
+          // fontFamily: "Inter",
         };
       default:
         return {
           fontSize: 16,
-          fontWeight: "400",
+          fontWeight: "500",
           color: "#000000",
-          fontFamily: "Inter",
+          // fontFamily: "Inter",
         };
     }
   };

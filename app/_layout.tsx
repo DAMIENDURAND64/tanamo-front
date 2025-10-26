@@ -1,7 +1,7 @@
+import AuthProvider from "@/providers/AuthProvider";
 import * as Font from "expo-font";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
-import AuthProvider from "@/providers/AuthProvider";
 
 // TODO: Quand tu installeras expo-notifications, tu pourras ajouter :
 // import * as Notifications from "expo-notifications";
