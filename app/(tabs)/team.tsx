@@ -1,17 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import TeamPage from "../pages/teamPage/TeamPage";
 
 export default function Team() {
-  return (
-    <View style={styles.container}>
-      <Text>Team</Text>
-    </View>
-  );
+  return <TeamPage />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

@@ -1,5 +1,4 @@
-import { StyleSheet, View } from "react-native";
-import { AutoSkeletonView } from "react-native-auto-skeleton";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Text from "./Text";
 import Title from "./Title";
 
@@ -13,26 +12,26 @@ export default function GroupTraining({
   group,
 }: GroupTrainingProps) {
   return (
-    <AutoSkeletonView
-      isLoading={isLoading}
-      defaultRadius={8}
-      animationType="pulse"
-    >
-      <View style={styles.container}>
-        <Title
-          weight={800}
-          color="secondary"
-          style={{
-            alignSelf: "flex-start",
-          }}
-        >
-          Groupe
-        </Title>
+    <View style={styles.container}>
+      <Title
+        weight={800}
+        color="secondary"
+        style={{
+          alignSelf: "flex-start",
+        }}
+      >
+        Groupe
+      </Title>
+      {isLoading ? (
+        <View style={[styles.groupBox, styles.loadingBox]}>
+          <ActivityIndicator size="small" color="#0066cc" />
+        </View>
+      ) : (
         <View style={styles.groupBox}>
           <Text variant="bold">{group}</Text>
         </View>
-      </View>
-    </AutoSkeletonView>
+      )}
+    </View>
   );
 }
 
@@ -51,5 +50,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "rgba(0, 76, 255, 0.4)",
     borderColor: "transparent",
+  },
+  loadingBox: {
+    backgroundColor: "#f0f0f0",
   },
 });

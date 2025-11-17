@@ -1,0 +1,5 @@
+fastapi==0.115.5
+uvicorn[standard]==0.32.0
+extranatapi==0.0.0.7
+requests==2.31.0
+beautifulsoup4==4.12.3

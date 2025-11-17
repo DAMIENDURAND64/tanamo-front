@@ -23,10 +23,18 @@ create table if not exists public.profiles (
   last_name text,
   birthdate date,
   group_id bigint references public.groups(id) on delete set null,
+  ffn_iuf text,
   created_at timestamptz not null default now()
 );
 
 comment on table public.profiles is 'Extended profile for each auth user';
+
+alter table if exists public.profiles
+  add column if not exists ffn_iuf text;
+
+create unique index if not exists idx_profiles_ffn_iuf
+  on public.profiles (ffn_iuf)
+  where ffn_iuf is not null;
 
 -- 4) Trigger to auto-create a profile when a user signs up
 create or replace function public.handle_new_user()
@@ -124,6 +132,29 @@ create policy "read training recurring" on public.training_recurring
 
 -- 7) Helpful indexes
 create index if not exists idx_profiles_group_id on public.profiles(group_id);
+
+-- 7b) Club information table
+create table if not exists public.club_info (
+  id bigserial primary key,
+  club_id text not null unique,
+  name text not null,
+  address text,
+  email text,
+  instagram text,
+  facebook text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+comment on table public.club_info is 'Club information (nom, adresse, réseaux sociaux)';
+alter table public.club_info enable row level security;
+
+-- Allow any authenticated user to read club info
+drop policy if exists "read club info" on public.club_info;
+create policy "read club info" on public.club_info
+  for select
+  to authenticated
+  using (true);
 
 -- 8) Helper: generate dated sessions from recurring between two dates
 -- Run from SQL editor (privileged) when the period changes.

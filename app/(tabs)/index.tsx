@@ -1,5 +1,5 @@
 import { useAuth } from "@/providers/AuthProvider";
-import Homepage from "../pages/homepage/Homepage";
+import HomePage from "../pages/homePage/HomePage";
 
 export default function Team() {
   const { session, loading } = useAuth();
@@ -8,5 +8,5 @@ export default function Team() {
     return null;
   }
 
-  return <Homepage />;
+  return <HomePage />;
 }

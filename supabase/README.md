@@ -25,7 +25,7 @@ Notes
 
 Tables incluses
 - `groups`: `id`, `name` (nom du groupe, unique), `created_at`.
-- `profiles` (table user): `id` (= `auth.users.id`), `email` (copie), `first_name`, `last_name`, `birthdate`, `group_id` (FK vers `groups`).
+- `profiles` (table user): `id` (= `auth.users.id`), `email` (copie), `first_name`, `last_name`, `birthdate`, `group_id` (FK vers `groups`), `ffn_iuf` (numéro de licence FFN optionnel, unique).
 - `training_sessions`: `id`, `group_id` (FK), `session_date` (date), `start_time` (optionnel), `end_time` (optionnel), `created_at`.
 - `training_recurring`: `id`, `group_id` (FK), `weekday` (1=lundi … 7=dimanche), `start_time`, `end_time`, `location` (texte), `valid_from`, `valid_to`, `created_at`.
 
