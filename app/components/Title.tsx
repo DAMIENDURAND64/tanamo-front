@@ -55,7 +55,7 @@ export default function Title({
     if (typeof size === "number") return size;
 
     const sizeMap: Record<string, number> = {
-      h1: 32,
+      h1: 42,
       h2: 28,
       h3: 24,
       h4: 20,
