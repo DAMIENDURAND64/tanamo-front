@@ -1,11 +1,16 @@
+import ssl
 from typing import Any
 
+import certifi
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from .dependencies import get_service
 from .ffn_estival_scraper import FFNEstivalScraper
 from .service import ExtranatService
+
+# Configuration SSL pour Python 3.13 sur macOS
+ssl._create_default_https_context = ssl._create_unverified_context
 
 app = FastAPI(
     title="FFN Extranat Proxy API",

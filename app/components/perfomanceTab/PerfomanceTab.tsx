@@ -1,4 +1,3 @@
-import { AVAILABLE_SEASONS } from "@/pages/teamPage/TeamPage";
 import {
   ActivityIndicator,
   RefreshControl,
@@ -11,26 +10,22 @@ import Text from "../Text";
 import styles from "./perfomanceTab.style";
 import usePerfomanceTab from "./usePerfomanceTab.hook";
 
-interface PerformancesTabProps {
-  selectedSeason: string;
-  onSeasonChange: (season: string) => void;
-}
-
-export default function PerformancesTab({
-  selectedSeason,
-  onSeasonChange,
-}: PerformancesTabProps) {
+export default function PerformancesTab() {
   const {
     data,
     loading,
     error,
     refreshing,
+    selectedSeason,
+    setSelectedSeason,
     activeTab,
     setActiveTab,
     onRefresh,
-  } = usePerfomanceTab({ selectedSeason, onSeasonChange });
+    AVAILABLE_SEASONS,
+  } = usePerfomanceTab();
 
-  if (loading && !refreshing) {
+  // Afficher le loader uniquement s'il n'y a pas encore de données
+  if (loading && !refreshing && !data) {
     return (
       <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#0066cc" />
@@ -39,7 +34,7 @@ export default function PerformancesTab({
     );
   }
 
-  if (error) {
+  if (error && !data) {
     return (
       <View style={styles.centerContainer}>
         <Text style={styles.errorText}>❌ {error}</Text>
@@ -77,23 +72,23 @@ export default function PerformancesTab({
           style={styles.seasonScrollView}
           contentContainerStyle={styles.seasonPickerContainer}
         >
-          {AVAILABLE_SEASONS.map((season) => (
+          {AVAILABLE_SEASONS.map((seasonYear: string) => (
             <TouchableOpacity
-              key={season}
+              key={seasonYear}
               style={[
                 styles.seasonButton,
-                selectedSeason === season && styles.activeSeasonButton,
+                selectedSeason === seasonYear && styles.activeSeasonButton,
               ]}
-              onPress={() => onSeasonChange(season)}
+              onPress={() => setSelectedSeason(seasonYear)}
             >
               <Text
                 style={
-                  selectedSeason === season
+                  selectedSeason === seasonYear
                     ? styles.activeSeasonButtonText
                     : styles.seasonButtonText
                 }
               >
-                {season}
+                {seasonYear}
               </Text>
             </TouchableOpacity>
           ))}
@@ -129,13 +124,22 @@ export default function PerformancesTab({
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {filteredNages.length === 0 ? (
+        {loading && (
+          <View style={styles.centerContainer}>
+            <ActivityIndicator size="large" color="#0066cc" />
+            <Text style={styles.loadingText}>Chargement des données...</Text>
+          </View>
+        )}
+
+        {!loading && filteredNages.length === 0 && (
           <View style={styles.emptyState}>
             <Text style={styles.emptyText}>
               Aucune performance trouvée pour cette catégorie
             </Text>
           </View>
-        ) : (
+        )}
+
+        {!loading && filteredNages.length > 0 && (
           <>
             {filteredNages.map(([nage, perfs]) => (
               <NageSection

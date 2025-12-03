@@ -65,14 +65,17 @@ $$ language plpgsql security definer;
 comment on function public.get_group_training_hours is 'Retourne les horaires d''entraînement formatés pour un groupe donné';
 
 -- Créer une vue pour faciliter la récupération des infos complètes du profil
-create or replace view public.profiles_with_group as
+-- IMPORTANT: Utiliser SECURITY INVOKER pour respecter les politiques RLS de profiles
+drop view if exists public.profiles_with_group;
+create view public.profiles_with_group 
+with (security_invoker = true) as
 select 
   p.*,
   g.name as group_name
 from public.profiles p
 left join public.groups g on p.group_id = g.id;
 
-comment on view public.profiles_with_group is 'Vue combinant profiles et le nom du groupe';
+comment on view public.profiles_with_group is 'Vue combinant profiles et le nom du groupe (avec security invoker pour RLS)';
 
 -- Accorder les permissions de lecture sur la vue
 grant select on public.profiles_with_group to authenticated;

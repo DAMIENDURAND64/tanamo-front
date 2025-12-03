@@ -3,10 +3,24 @@ import { useEffect, useState } from "react";
 const CLUB_ID = "2447";
 type TabType = "M" | "F";
 
-interface UsePerfomanceTabParams {
-  selectedSeason: string;
-  onSeasonChange: (season: string) => void;
-}
+export const AVAILABLE_SEASONS = [
+  "2026",
+  "2025",
+  "2024",
+  "2023",
+  "2022",
+  "2021",
+  "2020",
+  "2019",
+  "2018",
+  "2017",
+  "2016",
+  "2015",
+  "2014",
+  "2013",
+  "2012",
+  "2011",
+];
 
 interface UsePerfomanceTabReturn {
   data: SeasonPerformances | null;
@@ -16,11 +30,12 @@ interface UsePerfomanceTabReturn {
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
   onRefresh: () => Promise<void>;
+  selectedSeason: string;
+  setSelectedSeason: (season: string) => void;
+  AVAILABLE_SEASONS: string[];
 }
-export default function usePerfomanceTab({
-  selectedSeason,
-  onSeasonChange,
-}: UsePerfomanceTabParams): UsePerfomanceTabReturn {
+export default function usePerfomanceTab(): UsePerfomanceTabReturn {
+  const [selectedSeason, setSelectedSeason] = useState(AVAILABLE_SEASONS[0]);
   const [data, setData] = useState<SeasonPerformances | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,5 +82,8 @@ export default function usePerfomanceTab({
     activeTab,
     setActiveTab,
     onRefresh,
+    AVAILABLE_SEASONS,
+    selectedSeason,
+    setSelectedSeason,
   };
 }
